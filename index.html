@@ -1,0 +1,105 @@
+<html>
+<head>
+    <meta charset="utf8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+
+        div {
+            display: inline-block;
+        }
+
+        h1 {
+            padding: 20px;
+            text-align: center;
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif !important;
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <h1>Ծրագրավորում III Երևան</h1>
+            </tr>
+            <tr>
+                <h1>Սանդրո Հակոբյան</h1>
+            </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Գույն</th>
+                <th scope="col">Նկարագրություն</th>
+                <th scope="col">եղանակ</th>
+                <td id="season"></td>
+                <th scope="col">Ծնվել է</th>
+            </tr>
+        </thead>
+   
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td scope="row" style="background-color:green;"></td>
+                <td>Կանաչը խոտն է, որը բազմանում է N ցիկլը մեկ,մահանում է երբ նրան ուտում է խոտակերը, կամ նրան տրորում է գիշատիչը</td>
+                <td id="garssCount"></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td scope="row" style="background-color:orange;"></td>
+                <td>Դեղինը խոտակերն է, որը բազմանում է N հատ խոտ ուտելուց հետո և մահանում է N հատ չուտելուց հետո, կամ
+                    երբ նրան ուտում է գիշատիչը, կամ երբ նրան այրում է կրակը:</td>
+                <td id="garssEaterCount"></td>
+            </tr>
+            <tr>
+                    <th scope="row">3</th>
+                    <td scope="row" style="background-color:red;"></td>
+                    <td>Կարմիրը Գիշատիչն է, որը բազմանում է N հատ Խոտակեր ուտելուց հետո և մահանում է N հատ չուտելուց հետո:</td>
+                    <td id="gishatichCount"></td>
+            </tr>
+            <tr>
+                    <th scope="row">4</th>
+                    <td scope="row" style="background-color:aqua;"></td>
+                    <td>Սա հիվանդ խոտ է, որը բազմանում է N հատ օր հետո, առողջ խոտերը վարակելով ավելի թույլ հիվանդ խոտով,իսկ եթե առողջ խոտ չկա ավելի ուԺեղ է վարակում ավելի թույլ հիվանդ խոտը։Մահանում երբ նրան ուտում է խոտակերը, կամ բուժում է Ժամանակի Պահապանը:</td>
+                    <td id="virusCount"></td>
+            </tr>
+            <tr>
+                    <th scope="row">5</th>
+                    <td scope="row" style="background-color:#0cacac;"></td>
+                    <td>Սա ավելի թույլ հիվանդ խոտ է, որը բազմանում է N հատ օր հետո,միայն առողջ խոտ ստեղծելով որը հետագայում վարակելու է հիվանդ խոտը  և մահանում երբ նրան ուտում է խոտակերը, կամ բուժում է Ժամանակի Պահապանը:</td>
+                    <td id="MinivirusCount"></td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td scope="row" style="background-color:#700060;"></td>
+                <td>Նա չար կախարդ է, որը ցանկանում է աշխարհը վարակել ստեղծելով վարակ որը հիվանդացնում է խոտը,վարակում է իր կողքի բոլոր խոտերը,անմահ է:</td>
+                <td id="Count"></td>
+            </tr>
+            <tr>
+                <th scope="row">7</th>
+                <td scope="row" style="background-color:brown;"></td>
+                <td>Նա Ժամանակի Պահապանն է, որը պահպանում է աշխարում հավասարակշռությունը ստեղծելուվ այն կերպարներին որոնց թիվը խիստ նվազել է կամ ընդհանրապես զրոյացել,բւյում է իր կողքի բոլոր հիվանդ խուտերը,պայքարում է ժամանակի պահապանի հետ ստեղծելով հավասարակշռություն,անմահ է:</td>
+                <td id="TimeKeeperCount"></td>
+            </tr>
+            <tr>
+                    <th scope="row">8</th>
+                    <td scope="row" style="background-color:#acacac;"></td>
+                    <td>Սա դատարկ վանդակ է:խաղի ամենակարևոր կերպարներից մեկը,չնայած նրան որ կերպարը ոչինչ չի կարող անել,առանց սրա ոչինչ չէր ստացվի,բոլոր կենդանի օրգանիզմները քայլում,բազմանում են դատարկ վանդակի վրա։</td>
+                    <td id="EmptyCount"></td>
+            </tr>
+
+        </tbody>
+    </table>
+</body>
+
+</html>
